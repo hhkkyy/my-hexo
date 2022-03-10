@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <%- css('css/main.css') %>
+  <body><% page.posts.each(function (post) { %>
+  <div class="post-abstract mdui-typo ">
+    <%= post.toString() %>
+  </div>
+  <% }); %>
+</body>
+</html>

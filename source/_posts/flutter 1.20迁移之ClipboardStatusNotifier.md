@@ -1,0 +1,10 @@
+---
+title: flutter 1.20迁移之ClipboardStatusNotifier
+date: 2020-09-28 21:16:33
+tags:
+---
+flutter前段时间更新了1.20，提升了一些性能也增加了一些feature，总的来说是一个有些整体提升的比较大的升级。不过这次升级也导致了一些不兼容的情况，其中之一就是ClipboardStatusNotifier相关的东西。
+问题一般表现为，一些和拷贝相关的函数增加了一个参数ClipboardStatusNotifier导致编译失败。ClipboardStatusNotifier这个奇怪的东西算是1.20新加的，一开始以为是什么新feature，仔细看了一下发现是用于解决一个ios14的新问题的。
+ios14更新了一个feature，就是当某个app访问你的剪贴板时，会弹出一个提示：xxx app pasted from xxx，本意是提醒用户他的剪贴板被app使用了。flutter会在每次输入框focus的时候判断剪贴板里有没有东西，决定要不要给你弹黏贴选项。不过这个东西真的很烦人，flutter就打算给他绕过，用的就是ClipboardStatusNotifier。
+
+暂且建议：简单暴力地把ClipboardStatusNotifier传为null，结果为ios14的输入框始终会多一个黏贴选项，并不严重。
